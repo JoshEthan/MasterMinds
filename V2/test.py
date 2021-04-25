@@ -11,10 +11,8 @@ import os
 
 # PULLS DATA FROM TEXT FILES, WORKS PRETTY GOOD. DON'T THINK I NEED TO CHANGE THIS ONE AT ALL. KEEP
 # AN EYE OUT FOR THE DIRECTORY YOU USE AND THE SCHEDULING.
-
 TOTAL_STOCKS = 1  # 7163 for large directory
 directory = 'oneMinStocks'  # OR 'Stocks'
-
 
 def print_DF(df):
     print_seperators()
@@ -23,19 +21,13 @@ def print_DF(df):
     print(df)
     print_seperators()
 
-
 def print_seperators():
     print("\n\n\n")
 
-
 # Clear terminal
-
-
 def clear(): return system('cls')
 
 # Return total percentage
-
-
 def get_percentage_total(num_stocks):
     percentage = (num_stocks/TOTAL_STOCKS) * 100
     # DEBUG
@@ -44,7 +36,7 @@ def get_percentage_total(num_stocks):
     # print(percentage)
     return round(percentage, 2)
 
-
+# WHat is this for?
 empty = 0
 num_files = 0
 
