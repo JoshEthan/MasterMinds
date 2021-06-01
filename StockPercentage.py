@@ -79,7 +79,7 @@ def get_all_stocks():
 
 """
 Job: Scheduled to run every X seconds. Store a list of all the tickers and their change in percentage
-    into a DF. Take that DF and 
+    into a DF. Take that DF and ...
 """
 def job():
     #print_time()

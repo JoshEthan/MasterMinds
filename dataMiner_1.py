@@ -87,11 +87,14 @@ Web Socket Function: This function is called when the web socket is being opened
     it is currently pulling. It will use the 'Tickers.txt' file and pull those names.
 """
 def on_open(ws):
+    # ws.send('{"type":"subscribe","symbol":"BTC"}') # Opens the stock info
+
     system('cls') # This should clear the terminal
     file = open('Tickers.txt', 'r') # Opens the file
     print('Opening stocks...')
     global START_TICKER
     START_TICKER = 0
+    
     while True: # To Loop through our list of tickers
         ticker = file.readline()
         #print('Opened: ' + ticker.strip()) # Shows which tickers have been opened.
