@@ -22,7 +22,7 @@ def job():
     # print(m1.list_of_stock[0].change())
     # print('========================================')
 
-schedule.every(6).seconds.do(job)
+schedule.every(60).seconds.do(job)
 
 while True:
     schedule.run_pending()

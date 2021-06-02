@@ -3,5 +3,4 @@ oauth2client
 robin_stocks
 pyotp
 schedule
-datetime
-unittest
+datetime==0.4
