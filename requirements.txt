@@ -1,0 +1,7 @@
+gspread
+oauth2client
+robin_stocks
+pyotp
+schedule
+datetime
+unittest
