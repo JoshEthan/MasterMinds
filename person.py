@@ -15,6 +15,12 @@ class Person:
     def sell(self, close):
         self.money = self.coin * close
         self.coin = 0
+    
+    def get_money(self, close):
+        if self.money == 0:
+            return self.coin * close
+        else:
+            return self.money
 
     def display_info(self):
         print('Amount of money: ${}'.format(self.money))
