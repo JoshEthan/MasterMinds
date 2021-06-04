@@ -36,7 +36,7 @@ class TestMarket(unittest.TestCase):
         self.m1.run()
         self.m1.run()
         self.m1.run()
-        print(self.m1.list_of_stock[0].change())
+        print('{:f}'.format(self.m1.list_of_stock[0].change()))
 
     def test_stock_price_change(self):
         self.m1.symbols_file = "C:/git/MasterMinds/symbols.txt"

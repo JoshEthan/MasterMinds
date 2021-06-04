@@ -1,7 +1,7 @@
 import robin_stocks.robinhood as r
 import pyotp
 from config import USERNAME, PASSWORD, KEY
-from datetime import datetime
+from datetime import datetime, timedelta
 
 
 totp  = pyotp.TOTP(KEY).now()
@@ -27,7 +27,7 @@ class Stock:
         self.current_time = self.get_current_time()
 
     def change(self):
-        change = (self.close_price - self.open_price) / self.open_price
+        change = (self.close_price - self.open_price)   # / self.open_price
         return change
 
     # def get_close_price(self):
