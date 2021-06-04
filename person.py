@@ -104,7 +104,7 @@ class StratD(Person):
 
     def run(self, stock, direction):
         self.stock = stock
-        if self.stock.change() > self.stock.change() * 0.02 and self.money > 0:
+        if self.stock.close_price > self.stock.close_price * 0.02 and self.money > 0:
             self.buy(self.stock.close_price)
         elif direction == 'down' and self.coin > 0:
             self.sell(self.stock.close_price)
