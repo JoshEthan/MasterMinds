@@ -1,4 +1,4 @@
-from person import Person, StratB, StratC, StratD
+from person import Person, StratB, StratC, StratD, StratE
 from market import Market
 from sheets import Sheets
 import schedule
@@ -12,7 +12,7 @@ p1 = Person(100)
 p2 = StratB(100)
 p3 = StratC(100)
 p4 = StratD(100)
-p5 = StratD(100)
+p5 = StratE(100)
 sheet = Sheets()
 
 def job():

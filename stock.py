@@ -38,7 +38,7 @@ class Stock:
     #     return self.close_price
 
     def get_current_time(self):
-        datetime_obj = datetime.now().replace(tzinfo=timezone('US/Mountain'))
+        datetime_obj = datetime.now().replace(tzinfo=timezone('US/Arizona'))
         return datetime_obj.strftime("%H:%M:%S\n%m/%d/%Y")
     
     def display_info(self):
