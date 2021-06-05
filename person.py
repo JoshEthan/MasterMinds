@@ -19,6 +19,7 @@ class Person:
         self.direction = direction
         self.set_action()
         self.check_action()
+        self.initial_buy_in()
         # self.update_time()
         
     def check_action(self):
