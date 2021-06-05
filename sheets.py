@@ -11,10 +11,12 @@ class Sheets:
     def add_row(self, row):
         self.sheet.insert_row(row, 2)
 
-    def add_to_sheet2(self, b, c, d, move):
-        self.sheet.update_cell(1, 20+move, b)
-        self.sheet.update_cell(1, 21+move, c)
-        self.sheet.update_cell(1, 22+move, d)
+    def add_to_sheet2(self, initial, b, c, d, e):
+        self.sheet.update_cell(1, 19, initial)
+        self.sheet.update_cell(1, 20, b)
+        self.sheet.update_cell(1, 21, c)
+        self.sheet.update_cell(1, 22, d)
+        self.sheet.update_cell(1, 23, e)
 
 # data = sheet.get_all_records()
 

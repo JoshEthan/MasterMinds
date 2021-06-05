@@ -6,18 +6,20 @@ class Person:
         self.coin = 0
         self.action = '-'
         self.price_diff = ''
-        self.buyCounter = 0
-        self.reset = 0
         self.stock = None
-        self.day = 3
-        self.hasReset = False
+        self.direction = None
+        self.initial_buy = 0
+        self.buyCounter = 0
+        # self.reset = 0
+        # self.day = 3
+        # self.hasReset = False
 
     def run(self, stock, direction):
         self.stock = stock
-        if direction == 'up' and self.money:
-            self.buy(self.stock.close_price)
+        self.direction = direction
+        self.set_action()
         self.check_action()
-        self.update_time()
+        # self.update_time()
         
     def check_action(self):
         if self.action == 'B':
@@ -27,21 +29,22 @@ class Person:
         else:
             self.price_diff = ''
 
-    def update_time(self):
-        if self.reset != 0:
-            if self.reset == datetime(2021, 6, self.day):
-                self.buyCounter = 0
-                self.reset = self.stock.current_time
-                self.day += 1
-                self.hasReset = True
-            else:
-                self.hasReset = False
+    def set_action(self):
+        if self.direction == 'up' and self.money:
+            self.buy(self.stock.close_price)
+
+    def initial_buy_in(self):
+        if self.initial_buy == 0:
+            self.buy()
+            self.initial_buy = self.stock.close_price
 
     def buy(self, close):
         self.action = 'B'
         self.coin = self.money / close
         self.money = 0
         self.buyCounter += 1
+        if self.initial_buy == 0:
+            self.initial_buy = close
         if self.reset == 0:
             self.reset = datetime.now()
 
@@ -68,47 +71,60 @@ class Person:
         print('Amount of money: ${}'.format(self.money))
         print('Amount of coin: ${}'.format(self.coin))
 
+    # def update_time(self):
+    #     if self.reset != 0:
+    #         if self.reset == datetime(2021, 6, self.day):
+    #             self.buyCounter = 0
+    #             self.reset = self.stock.current_time
+    #             self.day += 1
+    #             self.hasReset = True
+    #         else:
+    #             self.hasReset = False
+
 class StratB(Person):
     def __init__(self, money):
         super().__init__(money)
 
-    def run(self, stock, direction):
-        self.stock = stock
-        if direction == 'up' and self.money > 0:
+    def set_action(self):
+        if self.direction == 'up' and self.money > 0:
             self.buy(self.stock.close_price)
-        elif direction == 'down' and self.coin > 0:
+        elif self.direction == 'down' and self.coin > 0:
             self.sell(self.stock.close_price)
         else:
             pass
-        self.check_action()
-        self.update_time()
 
 class StratC(Person):
     def __init__(self, money):
         super().__init__(money)
 
-    def run(self, stock, direction):
-        self.stock = stock
+    def set_action(self):
         if self.stock.change() > 0 and self.money > 0:
             self.buy(self.stock.close_price)
-        elif direction == 'down' and self.coin > 0:
+        elif self.direction == 'down' and self.coin > 0:
             self.sell(self.stock.close_price)
         else:
             pass
-        self.check_action()
-        self.update_time()
 
 class StratD(Person):
     def __init__(self, money):
         super().__init__(money)
 
-    def run(self, stock, direction):
-        self.stock = stock
-        if self.stock.change() > self.stock.close_price * 0.02 and self.money > 0:
+    def set_action(self):
+        if self.stock.change() > self.stock.close_price * 0.003 and self.money > 0:
             self.buy(self.stock.close_price)
-        elif direction == 'down' and self.coin > 0:
+        elif self.direction == 'down' and self.coin > 0:
             self.sell(self.stock.close_price)
         else:
             pass
-        self.check_action()
-        self.update_time()
+
+class StratE(Person):
+    def __init__(self, money):
+        super().__init__(money)
+
+    def set_action(self):
+        if self.stock.change() > self.stock.close_price * 0.003 and self.money > 0:
+            self.buy(self.stock.close_price)
+        elif self.direction == 'down' and self.coin > 0 and self.stock.change() < self.stock.close_price * 0.003:
+            self.sell(self.stock.close_price)
+        else:
+            pass
