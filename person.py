@@ -17,9 +17,10 @@ class Person:
     def run(self, stock, direction):
         self.stock = stock
         self.direction = direction
+        self.initial_buy_in()
         self.set_action()
         self.check_action()
-        self.initial_buy_in()
+        
         # self.update_time()
         
     def check_action(self):
@@ -36,7 +37,7 @@ class Person:
 
     def initial_buy_in(self):
         if self.initial_buy == 0:
-            self.buy()
+            self.buy(self.stock.close_price)
             self.initial_buy = self.stock.close_price
 
     def buy(self, close):
@@ -46,8 +47,8 @@ class Person:
         self.buyCounter += 1
         if self.initial_buy == 0:
             self.initial_buy = close
-        if self.reset == 0:
-            self.reset = datetime.now()
+        # if self.reset == 0:
+        #     self.reset = datetime.now()
 
     def sell(self, close):
         self.money = self.coin * close
