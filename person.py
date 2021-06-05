@@ -126,7 +126,7 @@ class StratE(Person):
     def set_action(self):
         if self.stock.change() > self.stock.close_price * 0.003 and self.money > 0:
             self.buy(self.stock.close_price)
-        elif self.direction == 'down' and self.coin > 0 and self.stock.change() < self.stock.close_price * 0.003:
+        elif self.direction == 'down' and self.coin > 0 and self.stock.change() < self.stock.close_price * -0.003:
             self.sell(self.stock.close_price)
         else:
             pass

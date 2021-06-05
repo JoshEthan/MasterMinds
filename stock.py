@@ -2,6 +2,8 @@ import robin_stocks.robinhood as r
 import pyotp
 from config import USERNAME, PASSWORD, KEY
 from datetime import datetime, timedelta
+from pytz import timezone
+
 
 
 totp  = pyotp.TOTP(KEY).now()
@@ -36,7 +38,8 @@ class Stock:
     #     return self.close_price
 
     def get_current_time(self):
-        return datetime.now().strftime("%H:%M:%S\n%m/%d/%Y")
+        datetime_obj = datetime.now().replace(tzinfo=timezone('US/Mountain'))
+        return datetime_obj.strftime("%H:%M:%S\n%m/%d/%Y")
     
     def display_info(self):
         print('\tSymbol: {}'.format(self.symbol))
