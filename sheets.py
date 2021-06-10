@@ -6,17 +6,18 @@ class Sheets:
         self.scope =["https://spreadsheets.google.com/feeds",'https://www.googleapis.com/auth/spreadsheets',"https://www.googleapis.com/auth/drive.file","https://www.googleapis.com/auth/drive"]
         self.creds = ServiceAccountCredentials.from_json_keyfile_name("creds.json", self.scope)
         self.client = gspread.authorize(self.creds)
-        self.sheet = self.client.open("Robinhood Data").sheet1
+        self.sheet = self.client.open("Doge Data").sheet1
 
     def add_row(self, row):
         self.sheet.insert_row(row, 2)
 
-    def add_to_sheet2(self, initial, b, c, d, e):
+    def add_to_sheet2(self, initial, b, c, d, e, SMA):
         self.sheet.update_cell(1, 19, initial)
         self.sheet.update_cell(1, 20, b)
         self.sheet.update_cell(1, 21, c)
         self.sheet.update_cell(1, 22, d)
         self.sheet.update_cell(1, 23, e)
+        self.sheet.update_cell(1, 24, SMA)
 
 # data = sheet.get_all_records()
 

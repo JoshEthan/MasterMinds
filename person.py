@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+from order import Order
 
 class Person:
     def __init__(self, money):
@@ -10,6 +11,7 @@ class Person:
         self.direction = None
         self.initial_buy = 0
         self.buyCounter = 0
+        self.order = Order()
         # self.reset = 0
         # self.day = 3
         # self.hasReset = False
@@ -45,6 +47,7 @@ class Person:
         self.coin = self.money / close
         self.money = 0
         self.buyCounter += 1
+        self.order.buy_price = close
         if self.initial_buy == 0:
             self.initial_buy = close
         # if self.reset == 0:
@@ -127,6 +130,21 @@ class StratE(Person):
         if self.stock.change() > self.stock.close_price * 0.003 and self.money > 0:
             self.buy(self.stock.close_price)
         elif self.direction == 'down' and self.coin > 0 and self.stock.change() < self.stock.close_price * -0.003:
+            self.sell(self.stock.close_price)
+        else:
+            pass
+
+class StratF(Person):
+    def __init__(self, money):
+        super().__init__(money)
+
+    def set_action(self):
+        if self.stock.SMA is not None:
+            if self.stock.close_price < self.stock.SMA and self.money > 0:
+                self.buy(self.stock.close_price)
+            # if self.order.change(self.stock.SMA) < self.stock.close_price * -0.0015 and self.coin > 0:
+            #     self.sell(self.stock.close_price)
+        if self.order.change(self.stock.close_price) > self.stock.close_price * 0.003 and self.coin > 0:   # 0 is more than -0.003
             self.sell(self.stock.close_price)
         else:
             pass

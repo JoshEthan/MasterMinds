@@ -16,6 +16,9 @@ class Stock:
         self.open_price = float(self.quote['mark_price'])
         self.close_price = float(self.quote['mark_price'])
         self.current_time = self.get_current_time()
+        self.SMA = None
+        self.close_price_list = []
+        self.list_size = 20
         # Have close and open initialize as the same
         # Maybe only open price initializes
         # get close price will set open price to it
@@ -27,10 +30,25 @@ class Stock:
         self.open_price = self.close_price
         self.close_price = float(r.crypto.get_crypto_quote(self.symbol)['mark_price'])
         self.current_time = self.get_current_time()
+        self.update_close_price_list()
+        self.get_SMA()
 
     def change(self):
         change = (self.close_price - self.open_price)   # / self.open_price
         return change
+
+    def get_SMA(self):
+        if len(self.close_price_list) == self.list_size:
+            self.SMA = sum(self.close_price_list)/len(self.close_price_list)
+        else:
+            self.SMA = None
+
+    def update_close_price_list(self):
+        if len(self.close_price_list) == self.list_size:
+            self.close_price_list.pop(0)
+            self.close_price_list.append(self.close_price)
+        else:
+            self.close_price_list.append(self.close_price)
 
     # def get_close_price(self):
     #     self.close_price = float(r.crypto.get_crypto_quote(self.symbol)['mark_price'])
